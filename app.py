@@ -47,8 +47,9 @@ def search():
     starts_with = data.get('startsWith', '').strip().lower()
     ends_with = data.get('endsWith', '').strip().lower()
     position_constraints = parse_position_constraints(data.get('positionConstraints', ''))
+    single_word = data.get('singleWord', False)
     
-    print(f"Search request - Include: {include_letters}, Exclude: {exclude_letters}, Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, Position Constraints: {position_constraints}")
+    print(f"Search request - Include: {include_letters}, Exclude: {exclude_letters}, Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, Position Constraints: {position_constraints}, Single Word: {single_word}")
     
     words = load_words()
     filtered_words = []
@@ -56,6 +57,10 @@ def search():
     for word in words:
         word_lower = word.lower()
         
+        # Check if word contains spaces (for single word filter)
+        if single_word and ' ' in word:
+            continue
+            
         # Check word length
         if min_length > 0 and len(word) < min_length:
             continue

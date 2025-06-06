@@ -56,6 +56,11 @@
                     </div>
                 </div>
                 
+                <div class="flex items-center space-x-2">
+                    <input type="checkbox" id="singleWord" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                    <label for="singleWord" class="text-sm font-medium text-gray-700">Show only single words (no spaces)</label>
+                </div>
+                
                 <button onclick="searchWords()" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                     Search
                 </button>
@@ -85,6 +90,7 @@
             const startsWith = document.getElementById('startsWith').value;
             const endsWith = document.getElementById('endsWith').value;
             const positionConstraints = document.getElementById('positionConstraints').value;
+            const singleWord = document.getElementById('singleWord').checked;
             const resultsDiv = document.getElementById('results');
             const resultCount = document.getElementById('resultCount');
             
@@ -101,7 +107,8 @@
                         maxLength: maxLength || 0,
                         startsWith,
                         endsWith,
-                        positionConstraints
+                        positionConstraints,
+                        singleWord
                     })
                 });
                 
