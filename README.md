@@ -76,6 +76,7 @@ http://localhost:5000
 ## Requirements
 - Python 3.6+
 - Flask 3.0.2
+- gunicorn==21.2.0
 - A words.txt file containing Turkish words (one word per line)
 
 ## Contributing
