@@ -4,17 +4,18 @@ import re
 
 app = Flask(__name__)
 
-def load_words():
+def load_words(language='tr'):
     try:
-        with open('words.txt', 'r', encoding='utf-8') as file:
+        filename = 'words_en.txt' if language == 'en' else 'words.txt'
+        with open(filename, 'r', encoding='utf-8') as file:
             words = [word.strip() for word in file.readlines()]
-            print(f"Loaded {len(words)} words from words.txt")  # Debug print
+            print(f"Loaded {len(words)} words from {filename}")  # Debug print
             return words
     except FileNotFoundError:
-        print("Error: words.txt file not found!")  # Debug print
+        print(f"Error: {filename} file not found!")  # Debug print
         return []
     except Exception as e:
-        print(f"Error reading words.txt: {str(e)}")  # Debug print
+        print(f"Error reading {filename}: {str(e)}")  # Debug print
         return []
 
 def parse_position_constraints(position_input):
@@ -48,10 +49,11 @@ def search():
     ends_with = data.get('endsWith', '').strip().lower()
     position_constraints = parse_position_constraints(data.get('positionConstraints', ''))
     single_word = data.get('singleWord', False)
+    language = data.get('language', 'tr')
     
-    print(f"Search request - Include: {include_letters}, Exclude: {exclude_letters}, Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, Position Constraints: {position_constraints}, Single Word: {single_word}")
+    print(f"Search request - Language: {language}, Include: {include_letters}, Exclude: {exclude_letters}, Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, Position Constraints: {position_constraints}, Single Word: {single_word}")
     
-    words = load_words()
+    words = load_words(language)
     filtered_words = []
     
     for word in words:
