@@ -1,89 +1,90 @@
-# Turkish Word Finder
+# Word Finder Application
 
-A powerful web application for finding Turkish words based on various filtering criteria. This tool is particularly useful for word games, language learning, and word puzzle solving.
-
-# Demo
-You can reach it through this link: https://turkish-word-finder.onrender.com/
+A powerful word search application that helps users find words based on various criteria. The application supports both Turkish and English languages and includes a translation feature.
 
 ## Features
 
-### Advanced Word Filtering
-- **Position-Specific Constraints**: Specify allowed letters for specific positions (e.g., "1EF" means first letter must be E or F)
-- **Include/Exclude Letters**: Filter words containing or excluding specific letters
-- **Length Filter**: Set minimum and maximum word length
-- **Prefix/Suffix Filter**: Find words starting or ending with specific letters
-- **Case-Insensitive**: Works with both uppercase and lowercase letters
-- **Turkish Character Support**: Fully supports Turkish alphabet and special characters
+### Word Search Capabilities
+- **Language Selection**: Switch between Turkish and English word databases
+- **Pattern Matching**:
+  - Start with specific letters
+  - End with specific letters
+  - Include specific letters
+  - Exclude specific letters
+  - Position-based constraints
+- **Length Control**:
+  - Set minimum word length
+  - Set maximum word length
+- **Word Type Filtering**:
+  - Option to show only single words (no spaces)
+  - Filter out compound words or phrases
 
 ### User Interface
-- Clean, modern web interface built with Flask and Tailwind CSS
-- Real-time search results
-- Responsive design for both desktop and mobile
-- Scrollable results area with word count
-- Clear input validation and error handling
+- **Modern Design**:
+  - Clean and intuitive interface
+  - Responsive layout
+  - Beautiful falling letters animation in the background
+  - Smooth transitions and animations
+- **Layout Features**:
+  - Centered main content (50% width)
+  - Responsive design for all screen sizes
+  - Smooth transitions between states
 
-## Usage Examples
+### Translation Integration
+- **Built-in Translation**:
+  - Direct integration with Tureng.com
+  - Side panel translation view
+  - Smooth panel transitions
+  - Maintains context while translating
 
-### Position Constraints
-```
-1EF 4CED
-```
-- First letter must be E or F
-- Fourth letter must be C, E, or D
+### Visual Effects
+- **Dynamic Background**:
+  - Colorful falling letters animation
+  - Multiple color variations
+  - Smooth rotation effects
+  - Non-intrusive design
+- **Responsive Layout**:
+  - Main content adjusts to 66% width when translation panel is open
+  - Smooth transitions between states
+  - Mobile-friendly design
 
-### Letter Filters
-```
-Include: a,e,i
-Exclude: x,y,z
-```
-- Words must contain all letters: a, e, and i
-- Words must not contain any of: x, y, or z
+## Technical Details
 
-### Length Filter
-```
-Minimum Length: 4
-Maximum Length: 8
-```
-- Find words between 4 and 8 letters long
+### Frontend
+- HTML5
+- CSS3 with modern features
+- JavaScript (ES6+)
+- Tailwind CSS for styling
+- Responsive design principles
 
-### Prefix/Suffix
-```
-Starts With: ab
-Ends With: er
-```
-- Find words starting with "ab" and ending with "er"
+### Backend
+- Python
+- Flask framework
+- Efficient word processing algorithms
 
-## Installation
+## Getting Started
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/turkish-word-finder.git
-cd turkish-word-finder
-```
+1. Clone the repository
+2. Install the required dependencies
+3. Run the application
+4. Access through your web browser
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+## Usage
 
-3. Run the application:
-```bash
-python app.py
-```
-
-4. Open your browser and navigate to:
-```
-http://localhost:5000
-```
-
-## Requirements
-- Python 3.6+
-- Flask 3.0.2
-- gunicorn==21.2.0
-- A words.txt file containing Turkish words (one word per line)
+1. Select your preferred language (Turkish/English)
+2. Enter your search criteria
+3. Click "Search" to find matching words
+4. Click the eye icon next to any word to see its translation
+5. Use the translation panel to view detailed translations
 
 ## Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+
+Feel free to contribute to this project by submitting issues or pull requests.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details. 
+
+This project is licensed under the MIT License.
+
+## Author
+
+FAZIL SR 
