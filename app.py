@@ -45,6 +45,7 @@ def search():
     exclude_letters = [letter.strip().lower() for letter in data.get('exclude', '').split(',') if letter.strip()]
     min_length = int(data.get('minLength', 0))
     max_length = int(data.get('maxLength', 0))
+    contains = data.get('contains', '').strip().lower()
     starts_with = data.get('startsWith', '').strip().lower()
     ends_with = data.get('endsWith', '').strip().lower()
     position_constraints = parse_position_constraints(data.get('positionConstraints', ''))
@@ -92,6 +93,11 @@ def search():
             
         # Check if word contains any exclude letters
         if exclude_letters and any(letter in word_lower for letter in exclude_letters):
+            continue
+
+        # Skip if word doesn't contain the required substring
+        if contains and contains.lower() not in word_lower:
+            print(f"Skipping {word} because it doesn't contain {contains}")
             continue
             
         filtered_words.append(word)
