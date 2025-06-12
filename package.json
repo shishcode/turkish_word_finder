@@ -8,10 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "npm install -g tailwindcss postcss autoprefixer && npm install",
     "build": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
     "watch": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
-    "postinstall": "npm run build",
     "clean": "rm -rf app/static/css/main.css",
     "rebuild": "npm run clean && npm run build"
   },

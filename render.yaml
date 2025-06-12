@@ -1,13 +1,13 @@
 services:
   - type: web
     name: word-finder-app
-    name: word-finder-app
     env: python
     buildCommand: |
       pip install -r requirements.txt
       npm cache clean --force
       npm install -g npm@latest
       npm install
+      npm install -g tailwindcss postcss autoprefixer
       npm run build
       echo "Verifying CSS build..."
       ls -la app/static/css/
