@@ -1,0 +1,30 @@
+{
+  "name": "word_finder_app_tr",
+  "version": "1.0.0",
+  "description": "A powerful word search application that helps users find words based on various criteria. The application supports both Turkish and English languages and includes a translation feature.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
+    "watch": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shishcode/turkish_word_finder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shishcode/turkish_word_finder/issues"
+  },
+  "homepage": "https://github.com/shishcode/turkish_word_finder#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.1"
+  }
+}

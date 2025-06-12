@@ -1,25 +1,29 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Tailwind build output
+app/static/css/main.css
+
 # Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+*.pyc
+*.pyo
+*.pyd
+
+# Flask
+instance/
+.env
+*.env
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
 
 # Virtual Environment
 venv/
@@ -27,10 +31,8 @@ ENV/
 
 # IDE
 .idea/
-.vscode/
 *.swp
 *.swo
 
 # OS
-.DS_Store
 Thumbs.db 
