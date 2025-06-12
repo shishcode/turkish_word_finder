@@ -8,6 +8,7 @@ A powerful word search application that helps users find words based on various 
 - **Language Selection**: Switch between Turkish and English word databases
 - **Pattern Matching**:
   - Start with specific letters
+  - Contains substring
   - End with specific letters
   - Include specific letters
   - Exclude specific letters
@@ -87,4 +88,4 @@ This project is licensed under the MIT License.
 
 ## Author
 
-FAZIL SR 
+FUZ SR 

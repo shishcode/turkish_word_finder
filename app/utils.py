@@ -1,24 +1,25 @@
-from flask import Flask, render_template, request, jsonify
 import os
 import re
-
-app = Flask(__name__)
+from collections import Counter
 
 def load_words(language='tr'):
+    """Load the word list based on the selected language."""
     try:
         filename = 'words_en.txt' if language == 'en' else 'words.txt'
-        with open(filename, 'r', encoding='utf-8') as file:
+        filepath = os.path.join('data', filename)
+        with open(filepath, 'r', encoding='utf-8') as file:
             words = [word.strip() for word in file.readlines()]
-            print(f"Loaded {len(words)} words from {filename}")  # Debug print
+            #print(f"Loaded {len(words)} words from {filename}")  # Debug print
             return words
     except FileNotFoundError:
-        print(f"Error: {filename} file not found!")  # Debug print
+        #print(f"Error: {filename} file not found!")  # Debug print
         return []
     except Exception as e:
-        print(f"Error reading {filename}: {str(e)}")  # Debug print
+        #print(f"Error reading {filename}: {str(e)}")  # Debug print
         return []
 
 def parse_position_constraints(position_input):
+    """Parse position constraints from input string."""
     constraints = {}
     if not position_input:
         return constraints
@@ -34,25 +35,32 @@ def parse_position_constraints(position_input):
             constraints[position - 1] = allowed_chars  # Convert to 0-based index
     return constraints
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/search', methods=['POST'])
-def search():
-    data = request.get_json()
-    include_letters = [letter.strip().lower() for letter in data.get('include', '').split(',') if letter.strip()]
-    exclude_letters = [letter.strip().lower() for letter in data.get('exclude', '').split(',') if letter.strip()]
-    min_length = int(data.get('minLength', 0))
-    max_length = int(data.get('maxLength', 0))
-    contains = data.get('contains', '').strip().lower()
-    starts_with = data.get('startsWith', '').strip().lower()
-    ends_with = data.get('endsWith', '').strip().lower()
-    position_constraints = parse_position_constraints(data.get('positionConstraints', ''))
-    single_word = data.get('singleWord', False)
-    language = data.get('language', 'tr')
+def search_words(params):
+    """Search for words based on various criteria."""
+    include_letters = [letter.strip().lower() for letter in params.get('include', '').split(',') if letter.strip()]
+    exclude_letters = [letter.strip().lower() for letter in params.get('exclude', '').split(',') if letter.strip()]
     
-    print(f"Search request - Language: {language}, Include: {include_letters}, Exclude: {exclude_letters}, Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, Position Constraints: {position_constraints}, Single Word: {single_word}")
+    # Handle empty values for min and max length
+    try:
+        min_length = int(params.get('minLength', 0))
+    except (ValueError, TypeError):
+        min_length = 0
+        
+    try:
+        max_length = int(params.get('maxLength', 0))
+    except (ValueError, TypeError):
+        max_length = 0
+    
+    contains = params.get('contains', '').strip().lower()
+    starts_with = params.get('startsWith', '').strip().lower()
+    ends_with = params.get('endsWith', '').strip().lower()
+    position_constraints = parse_position_constraints(params.get('positionConstraints', ''))
+    single_word = params.get('singleWord', False)
+    language = params.get('language', 'tr')
+    
+    #print(f"Search request - Language: {language}, Include: {include_letters}, Exclude: {exclude_letters}, "
+    #      f"Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, "
+    #      f"Position Constraints: {position_constraints}, Single Word: {single_word}")
     
     words = load_words(language)
     filtered_words = []
@@ -97,17 +105,9 @@ def search():
 
         # Skip if word doesn't contain the required substring
         if contains and contains.lower() not in word_lower:
-            print(f"Skipping {word} because it doesn't contain {contains}")
             continue
             
         filtered_words.append(word)
     
-    print(f"Found {len(filtered_words)} matching words")  # Debug print
-    
-    return jsonify({
-        'count': len(filtered_words),
-        'words': filtered_words
-    })
-
-if __name__ == '__main__':
-    app.run(debug=True) 
+    #print(f"Found {len(filtered_words)} matching words")  # Debug print
+    return filtered_words 
