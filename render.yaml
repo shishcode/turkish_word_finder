@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: turkish-word-finder
+    name: word-finder-app
     env: python
     region: oregon
     plan: free
@@ -15,20 +15,12 @@ services:
       
       # Verify CSS build
       echo "Verifying CSS build..."
-      if [ ! -f "app/static/css/main.css" ]; then
-        echo "Error: main.css was not generated"
-        exit 1
-      fi
-      
-      # List CSS files for verification
-      echo "CSS files in app/static/css/:"
       ls -la app/static/css/
       
       # Ensure proper permissions
+      echo "Setting permissions..."
       chmod -R 755 app/static/css/
-    startCommand: |
-      export PYTHONPATH=$PYTHONPATH:$(pwd)
-      gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    startCommand: export PYTHONPATH=$PYTHONPATH:$(pwd) && gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
@@ -41,7 +33,10 @@ services:
         generateValue: true
       - key: FLASK_APP
         value: wsgi.py
+      - key: NODE_VERSION
+        value: 18.17.0
       - key: NODE_ENV
         value: production
       - key: TAILWIND_MODE
         value: build
+    autoDeploy: true
