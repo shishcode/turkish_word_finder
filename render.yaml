@@ -4,12 +4,12 @@ services:
     env: python
     buildCommand: |
       pip install -r requirements.txt
-      npm cache clean --force
-      npm install -g npm@latest
       npm install
-      echo "Verifying node_modules..."
-      ls -la node_modules/.bin/
-      npm run build
+      echo "Listing node_modules/.bin contents:"
+      ls -l node_modules/.bin
+      echo "Listing node_modules/tailwindcss:"
+      ls -l node_modules/tailwindcss
+      npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify
       echo "Verifying CSS build..."
       ls -la app/static/css/
       echo "Setting permissions..."
