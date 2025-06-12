@@ -7,7 +7,8 @@ services:
       npm cache clean --force
       npm install -g npm@latest
       npm install
-      npm install -g tailwindcss postcss autoprefixer
+      echo "Verifying node_modules..."
+      ls -la node_modules/.bin/
       npm run build
       echo "Verifying CSS build..."
       ls -la app/static/css/
