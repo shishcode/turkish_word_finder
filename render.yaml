@@ -2,13 +2,16 @@ services:
   - type: web
     name: turkish-word-finder
     env: python
+    region: oregon
+    plan: free
     buildCommand: |
       pip install -r requirements.txt
       npm install
       npm run build
     startCommand: |
       export PYTHONPATH=$PYTHONPATH:$(pwd)
-      gunicorn wsgi:app
+      gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
@@ -16,3 +19,7 @@ services:
         value: production
       - key: PYTHONPATH
         value: /opt/render/project/src
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_APP
+        value: wsgi.py
