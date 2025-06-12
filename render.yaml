@@ -1,9 +1,34 @@
 services:
   - type: web
-    name: turkish-word-finder
+    name: word-finder-app
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    buildCommand: |
+      pip install -r requirements.txt
+      npm cache clean --force
+      npm install -g npm@latest
+      npm install
+      npm run build
+      echo "Verifying CSS build..."
+      ls -la app/static/css/
+      echo "Setting permissions..."
+      chmod -R 755 app/static/css/
+    startCommand: export PYTHONPATH=$PYTHONPATH:$(pwd) && gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.0 
+        value: 3.9.0
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+      - key: FLASK_APP
+        value: wsgi.py
+      - key: NODE_VERSION
+        value: 20.11.1
+      - key: NODE_ENV
+        value: production
+      - key: TAILWIND_MODE
+        value: build
+      - key: PATH
+        value: /opt/render/project/src/node_modules/.bin:$PATH
+    healthCheckPath: /health
+    autoDeploy: true 

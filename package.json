@@ -8,8 +8,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "npm install -g tailwindcss postcss autoprefixer && npm install",
     "build": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
-    "watch": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
+    "watch": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
+    "postinstall": "npm run build",
+    "clean": "rm -rf app/static/css/main.css",
+    "rebuild": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "@tailwindcss/forms": "^0.5.7"
   }
 }
