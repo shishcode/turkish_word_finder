@@ -24,5 +24,9 @@ services:
         value: production
       - key: TAILWIND_MODE
         value: build
+      - key: FLASK_DEBUG
+        value: 0
+      - key: SECRET_KEY
+        value: 69d689b96758b69d2568c180d9b59b603da42a77be46d49165f51ed587d7bbc7
     healthCheckPath: /health
     autoDeploy: true 

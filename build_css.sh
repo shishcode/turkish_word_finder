@@ -32,4 +32,8 @@ if [ -f "app/static/css/main.css" ]; then
 else
     echo "CSS build failed!"
     exit 1
-fi 
+fi
+
+NODE_VERSION=20.11.1
+NODE_ENV=production
+TAILWIND_MODE=build 
