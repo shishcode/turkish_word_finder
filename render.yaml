@@ -10,11 +10,11 @@ services:
       echo "Building Tailwind CSS..."
       npm run build:css
       echo "Verifying build..."
-      python verify_build.py
+      python3 verify_build.py
       echo "Setting permissions..."
       chmod -R 755 app/static/css/
       echo "Build completed successfully!"
-    startCommand: export PYTHONPATH=$PYTHONPATH:$(pwd) && gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    startCommand: gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
