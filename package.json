@@ -1,12 +1,11 @@
 {
-  "name": "word_finder_app_tr",
+  "name": "word-finder-app",
   "version": "1.0.0",
-  "description": "A powerful word search application that helps users find words based on various criteria. The application supports both Turkish and English languages and includes a translation feature.",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "description": "Word Finder Application with Tailwind CSS",
+  "private": true,
   "scripts": {
+    "build:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
+    "watch:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
     "watch": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
@@ -17,17 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/shishcode/turkish_word_finder.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/shishcode/turkish_word_finder/issues"
-  },
-  "homepage": "https://github.com/shishcode/turkish_word_finder#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
+    "tailwindcss": "^3.4.17",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.1",
-    "@tailwindcss/forms": "^0.5.7"
   }
-}
+} 

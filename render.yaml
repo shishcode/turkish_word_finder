@@ -3,34 +3,36 @@ services:
     name: word-finder-app
     env: python
     buildCommand: |
+      echo "Installing Python dependencies..."
       pip install -r requirements.txt
+      echo "Installing Node.js dependencies..."
       npm install
-      echo "Listing node_modules/.bin contents:"
-      ls -l node_modules/.bin
-      echo "Listing node_modules/tailwindcss:"
-      ls -l node_modules/tailwindcss
-      npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify
-      echo "Verifying CSS build..."
-      ls -la app/static/css/
+      echo "Building Tailwind CSS..."
+      npm run build:css
+      echo "Verifying build..."
+      python3 verify_build.py
       echo "Setting permissions..."
       chmod -R 755 app/static/css/
-    startCommand: export PYTHONPATH=$PYTHONPATH:$(pwd) && gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+      echo "Build completed successfully!"
+    startCommand: ./start.sh
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
+      - key: NODE_VERSION
+        value: 20.11.1
       - key: FLASK_ENV
         value: production
       - key: PYTHONPATH
         value: /opt/render/project/src
       - key: FLASK_APP
         value: wsgi.py
-      - key: NODE_VERSION
-        value: 20.11.1
       - key: NODE_ENV
         value: production
       - key: TAILWIND_MODE
         value: build
-      - key: PATH
-        value: /opt/render/project/src/node_modules/.bin:$PATH
+      - key: FLASK_DEBUG
+        value: 0
+      - key: SECRET_KEY
+        value: 69d689b96758b69d2568c180d9b59b603da42a77be46d49165f51ed587d7bbc7
     healthCheckPath: /health
     autoDeploy: true 
