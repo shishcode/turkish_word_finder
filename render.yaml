@@ -14,7 +14,7 @@ services:
       echo "Setting permissions..."
       chmod -R 755 app/static/css/
       echo "Build completed successfully!"
-    startCommand: gunicorn wsgi:app --workers 2 --bind 0.0.0.0:$PORT --timeout 120
+    startCommand: ./start.sh
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
