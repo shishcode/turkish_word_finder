@@ -1,39 +1,25 @@
 #!/bin/bash
 
-# Install dependencies globally
-npm install -g tailwindcss@latest postcss@latest autoprefixer@latest
+# Exit on any error
+set -e
 
-# Create a temporary package.json for the build
-echo '{
-  "name": "temp-build",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "tailwindcss": "latest",
-    "postcss": "latest",
-    "autoprefixer": "latest"
-  }
-}' > package.json
-
-# Install dependencies
+echo "Installing Node.js dependencies..."
 npm install
 
-# Build CSS
-npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify
-
-# Clean up
-rm package.json
-rm -rf node_modules
+echo "Building Tailwind CSS..."
+npm run build:css
 
 # Verify the build
 if [ -f "app/static/css/main.css" ]; then
-    echo "CSS build successful!"
-    ls -l app/static/css/main.css
+    echo "✅ CSS build successful!"
+    echo "📁 Generated file: app/static/css/main.css"
+    echo "📊 File size: $(du -h app/static/css/main.css | cut -f1)"
 else
-    echo "CSS build failed!"
+    echo "❌ CSS build failed!"
     exit 1
 fi
 
-NODE_VERSION=20.11.1
-NODE_ENV=production
-TAILWIND_MODE=build 
+# Set proper permissions
+chmod -R 755 app/static/css/
+
+echo "🎉 Build process completed successfully!" 

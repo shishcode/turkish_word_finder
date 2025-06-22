@@ -1,0 +1,18 @@
+{
+  "name": "word-finder-app",
+  "version": "1.0.0",
+  "description": "Word Finder Application with Tailwind CSS",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
+    "watch:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

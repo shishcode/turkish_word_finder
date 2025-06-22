@@ -63,12 +63,72 @@ A powerful word search application that helps users find words based on various 
 - Flask framework
 - Efficient word processing algorithms
 
+## Tailwind CSS Setup
+
+This project uses Tailwind CSS for styling with a robust build process optimized for deployment on Render.com.
+
+### Local Development
+
+1. **Install Node.js dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start development mode (with CSS watching):**
+   ```bash
+   ./dev.sh
+   ```
+
+3. **Build CSS manually:**
+   ```bash
+   npm run build:css
+   ```
+
+4. **Verify the build:**
+   ```bash
+   python3 verify_build.py
+   ```
+
+### Production Deployment
+
+The project is configured for automatic deployment on Render.com with the following features:
+
+- **Automatic CSS Build**: Tailwind CSS is built during deployment
+- **Build Verification**: Ensures CSS is properly generated
+- **Fallback CDN**: Uses Tailwind CDN if build fails
+- **Optimized Output**: Minified CSS for production
+
+### Build Process
+
+1. **Dependencies**: Uses `package.json` for Node.js dependency management
+2. **Build Script**: `npm run build:css` compiles Tailwind CSS
+3. **Verification**: `verify_build.py` checks build success
+4. **Fallback**: Automatic CDN fallback if build fails
+
+### File Structure
+
+```
+├── app/static/css/
+│   ├── tailwind.css      # Tailwind directives
+│   ├── main.css          # Generated CSS (built)
+│   ├── style.css         # Custom styles
+│   └── falling-letters.css
+├── package.json          # Node.js dependencies
+├── tailwind.config.js    # Tailwind configuration
+├── postcss.config.js     # PostCSS configuration
+├── build_css.sh          # Build script
+├── verify_build.py       # Build verification
+└── render.yaml           # Render.com configuration
+```
+
 ## Getting Started
 
 1. Clone the repository
-2. Install the required dependencies
-3. Run the application
-4. Access through your web browser
+2. Install Python dependencies: `pip install -r requirements.txt`
+3. Install Node.js dependencies: `npm install`
+4. Build CSS: `npm run build:css`
+5. Run the application: `python3 run.py`
+6. Access through your web browser
 
 ## Usage
 

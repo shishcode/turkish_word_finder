@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Word Finder{% endblock %}</title>
+    
+    <!-- Primary Tailwind CSS (built) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    
+    <!-- Fallback Tailwind CSS CDN (if build fails) -->
+    <script>
+        // Check if main.css loaded properly, if not load CDN fallback
+        window.addEventListener('load', function() {
+            const mainCss = document.querySelector('link[href*="main.css"]');
+            if (!mainCss || mainCss.sheet.cssRules.length === 0) {
+                console.log('Loading Tailwind CSS fallback from CDN...');
+                const fallback = document.createElement('link');
+                fallback.rel = 'stylesheet';
+                fallback.href = 'https://cdn.tailwindcss.com';
+                document.head.appendChild(fallback);
+            }
+        });
+    </script>
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
