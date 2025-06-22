@@ -6,13 +6,18 @@
   "scripts": {
     "build:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
     "watch:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
+    "watch": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
+    "clean": "rm -rf app/static/css/main.css",
+    "rebuild": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shishcode/turkish_word_finder.git"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17",
     "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.19"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 } 
