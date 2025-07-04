@@ -1,11 +1,11 @@
-# Word Finder Application
+# Multi-Language Word Finder Application
 
-A powerful word search application that helps users find words based on various criteria. The application supports both Turkish and English languages and includes a translation feature.
+A powerful word search application that helps users find words based on various criteria. The application supports Turkish, English, and French languages and includes a translation feature.
 
 ## Features
 
 ### Word Search Capabilities
-- **Language Selection**: Switch between Turkish and English word databases
+- **Language Selection**: Switch between Turkish, English, and French word databases
 - **Pattern Matching**:
   - Start with specific letters
   - Contains substring
@@ -63,6 +63,11 @@ A powerful word search application that helps users find words based on various 
 - Flask framework
 - Efficient word processing algorithms
 
+### Word Databases
+- **Turkish**: 76,186 words (`data/words.txt`)
+- **English**: 370,105 words (`data/words_en.txt`)
+- **French**: 22,740 words (`data/words_fr.txt`)
+
 ## Tailwind CSS Setup
 
 This project uses Tailwind CSS for styling with a robust build process optimized for deployment on Render.com.
@@ -113,6 +118,10 @@ The project is configured for automatic deployment on Render.com with the follow
 │   ├── main.css          # Generated CSS (built)
 │   ├── style.css         # Custom styles
 │   └── falling-letters.css
+├── data/
+│   ├── words.txt         # Turkish word database
+│   ├── words_en.txt      # English word database
+│   └── words_fr.txt      # French word database
 ├── package.json          # Node.js dependencies
 ├── tailwind.config.js    # Tailwind configuration
 ├── postcss.config.js     # PostCSS configuration
@@ -132,7 +141,7 @@ The project is configured for automatic deployment on Render.com with the follow
 
 ## Usage
 
-1. Select your preferred language (Turkish/English)
+1. Select your preferred language (Turkish/English/French)
 2. Enter your search criteria
 3. Click "Search" to find matching words
 4. Click the eye icon next to any word to see its translation

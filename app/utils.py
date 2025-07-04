@@ -5,7 +5,12 @@ from collections import Counter
 def load_words(language='tr'):
     """Load the word list based on the selected language."""
     try:
-        filename = 'words_en.txt' if language == 'en' else 'words.txt'
+        if language == 'en':
+            filename = 'words_en.txt'
+        elif language == 'fr':
+            filename = 'words_fr.txt'
+        else:
+            filename = 'words.txt'  # Default to Turkish
         filepath = os.path.join('data', filename)
         with open(filepath, 'r', encoding='utf-8') as file:
             words = [word.strip() for word in file.readlines()]
