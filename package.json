@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
-    "watch:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch"
+    "watch:css": "tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --minify",
     "watch": "npx tailwindcss -i ./app/static/css/tailwind.css -o ./app/static/css/main.css --watch",
@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17",
-    "postcss": "^8.4.38",
+    "postcss": "^8.4.38"
   }
 } 
