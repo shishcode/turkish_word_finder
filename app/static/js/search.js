@@ -74,4 +74,19 @@ async function searchWords() {
         console.error('Error:', error);
         resultsDiv.innerHTML = '<div class="col-span-full text-red-500 text-center py-4">An error occurred while searching</div>';
     }
+}
+
+function clearInputs() {
+    document.getElementById('language').value = 'tr';
+    document.getElementById('startsWith').value = '';
+    document.getElementById('contains').value = '';
+    document.getElementById('endsWith').value = '';
+    document.getElementById('include').value = '';
+    document.getElementById('exclude').value = '';
+    document.getElementById('positionConstraints').value = '';
+    document.getElementById('minLength').value = '';
+    document.getElementById('maxLength').value = '';
+    document.getElementById('singleWord').checked = false;
+    document.getElementById('results').innerHTML = '';
+    document.getElementById('resultCount').textContent = '';
 } 
