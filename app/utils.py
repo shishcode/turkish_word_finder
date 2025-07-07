@@ -23,12 +23,15 @@ def load_words(language='tr'):
         #print(f"Error reading {filename}: {str(e)}")  # Debug print
         return []
 
-def parse_position_constraints(position_input):
+def turkish_lower(s):
+    """Lowercase a string using Turkish-specific rules."""
+    return s.replace('I', 'ı').replace('İ', 'i').lower()
+
+def parse_position_constraints(position_input, language='tr'):
     """Parse position constraints from input string."""
     constraints = {}
     if not position_input:
         return constraints
-        
     # Split by spaces to handle multiple position constraints
     parts = position_input.strip().split()
     for part in parts:
@@ -36,14 +39,22 @@ def parse_position_constraints(position_input):
         match = re.match(r'(\d+)([A-Za-z]+)', part)
         if match:
             position = int(match.group(1))
-            allowed_chars = set(match.group(2).lower())
+            if language == 'tr':
+                allowed_chars = set(turkish_lower(match.group(2)))
+            else:
+                allowed_chars = set(match.group(2).lower())
             constraints[position - 1] = allowed_chars  # Convert to 0-based index
     return constraints
 
 def search_words(params):
     """Search for words based on various criteria."""
-    include_letters = [letter.strip().lower() for letter in params.get('include', '').split(',') if letter.strip()]
-    exclude_letters = [letter.strip().lower() for letter in params.get('exclude', '').split(',') if letter.strip()]
+    language = params.get('language', 'tr')
+    if language == 'tr':
+        lower_func = turkish_lower
+    else:
+        lower_func = str.lower
+    include_letters = [lower_func(letter.strip()) for letter in params.get('include', '').split(',') if letter.strip()]
+    exclude_letters = [lower_func(letter.strip()) for letter in params.get('exclude', '').split(',') if letter.strip()]
     
     # Handle empty values for min and max length
     try:
@@ -56,12 +67,11 @@ def search_words(params):
     except (ValueError, TypeError):
         max_length = 0
     
-    contains = params.get('contains', '').strip().lower()
-    starts_with = params.get('startsWith', '').strip().lower()
-    ends_with = params.get('endsWith', '').strip().lower()
-    position_constraints = parse_position_constraints(params.get('positionConstraints', ''))
+    contains = lower_func(params.get('contains', '').strip())
+    starts_with = lower_func(params.get('startsWith', '').strip())
+    ends_with = lower_func(params.get('endsWith', '').strip())
+    position_constraints = parse_position_constraints(params.get('positionConstraints', ''), language=language)
     single_word = params.get('singleWord', False)
-    language = params.get('language', 'tr')
     
     #print(f"Search request - Language: {language}, Include: {include_letters}, Exclude: {exclude_letters}, "
     #      f"Length: {min_length}-{max_length}, Starts: {starts_with}, Ends: {ends_with}, "
@@ -71,7 +81,7 @@ def search_words(params):
     filtered_words = []
     
     for word in words:
-        word_lower = word.lower()
+        word_lower = lower_func(word)
         
         # Check if word contains spaces (for single word filter)
         if single_word and ' ' in word:
@@ -109,7 +119,7 @@ def search_words(params):
             continue
 
         # Skip if word doesn't contain the required substring
-        if contains and contains.lower() not in word_lower:
+        if contains and contains not in word_lower:
             continue
             
         filtered_words.append(word)
