@@ -48,4 +48,46 @@ document.addEventListener('DOMContentLoaded', function() {
             createLetter();
         }, i * 150);
     }
+
+    // --- Falling Phrases Logic ---
+    const phrases = [
+        'WORDLE SOLVER',
+        'WORD FINDER',
+        'ANAGRAM FINDER',
+        'REBUS HELPER',
+        'CROSSWORD SOLVER',
+        'SCRABBLE HELPER'
+    ];
+
+    // --- Dissolving Phrases Logic ---
+    let currentPhraseIndex = 0;
+    function showDissolvingPhrase() {
+        // Use the navbar brand container for phrases
+        const navbarBrand = document.getElementById('dissolving-phrases-navbar');
+        if (!navbarBrand) return;
+        // Remove any existing phrase
+        const existing = navbarBrand.querySelector('.falling-phrase');
+        if (existing) existing.remove();
+        const phrase = document.createElement('span');
+        phrase.className = 'falling-phrase';
+        phrase.textContent = phrases[currentPhraseIndex];
+        phrase.style.color = getRandomColor();
+        phrase.style.opacity = 1;
+        navbarBrand.appendChild(phrase);    
+
+        // Prepare next phrase index
+        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+
+        // Show for a while, then dissolve, then after dissolve, show next
+        setTimeout(() => {
+            phrase.classList.add('dissolve');
+            phrase.addEventListener('animationend', () => {
+                phrase.remove();
+                setTimeout(showDissolvingPhrase, 100); // show next after dissolve
+            }, { once: true });
+        }, 1200); // show for 1.2s before dissolving
+    }
+
+    // Start the dissolve phrase loop
+    showDissolvingPhrase();
 }); 
