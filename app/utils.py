@@ -35,8 +35,9 @@ def parse_position_constraints(position_input, language='tr'):
     # Split by spaces to handle multiple position constraints
     parts = position_input.strip().split()
     for part in parts:
-        # Match pattern like "1ABC" or "4XYZ"
-        match = re.match(r'(\d+)([A-Za-z]+)', part)
+        # Match pattern like "1ABC" or "4XYZ" using Unicode-aware letters
+        # Previous pattern used [A-Za-z]+ which failed for non-ASCII letters
+        match = re.match(r'(\d+)([^\W\d_]+)', part, re.UNICODE)
         if match:
             position = int(match.group(1))
             if language == 'tr':
